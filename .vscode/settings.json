@@ -18,5 +18,12 @@
             "HOME": "${env:HOME}",
             "USER": "${env:USER}"
         }
+    },
+    "eslint.enable": false,
+    "typescript.validate.enable": false,
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": false,
+      "source.organizeImports": false
     }
 }
