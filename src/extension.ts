@@ -27,6 +27,7 @@ import { BuildMode } from "./arduino/arduino";
 import * as Logger from "./logger/logger";
 import { SerialMonitor } from "./serialmonitor/serialMonitor";
 const usbDetectorModule = impor("./serialmonitor/usbDetector") as typeof import ("./serialmonitor/usbDetector");
+import { runCustomWarningFix } from "./preBuildHook";
 
 export async function activate(context: vscode.ExtensionContext) {
     Logger.configure(context);
@@ -171,6 +172,8 @@ export async function activate(context: vscode.ExtensionContext) {
     }, () => {
         return { board: arduinoContextModule.default.boardManager.currentBoard.name };
     });
+
+    registerNonArduinoCommand("arduino.runCustomWarningFix", runCustomWarningFix);
 
     registerArduinoCommand("arduino.selectSketch", async () => {
         const sketchFileName = deviceContext.sketch;

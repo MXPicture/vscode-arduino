@@ -1,8 +1,34 @@
 # Visual Studio Code extension for Arduino
 
 > NOTE:
-> This is a community maintained fork of [Microsoft's vscode arduino extension](https://github.com/microsoft/vscode-arduino)
+> Arduino Custom Hook for VS Code
+> This VS Code extension modifies `platform.txt` before compiling Arduino code, removing `-w` warning flags to enable full warning output.
 
+## Features
+
+- Edits `platform.txt` before build
+- Backs up the original file
+- Optional enable/disable via settings
+- Manual command: `Run Custom Platform.txt Warning Fix`
+
+## Usage
+
+- Add your board’s `fqbn` to `.vscode/arduino.json`
+- Enable the hook in settings (`arduino.customWarningFix.enabled`)
+- Build your project – the hook runs automatically.
+
+## 🚀 Publish or Share the `.vsix`
+
+Once built:
+
+- Download the artifact from GitHub Actions.
+- Share it directly or install via:
+
+```bash
+code --install-extension arduino-custom-hook-0.0.1.vsix
+```
+
+## Original README
 Welcome to the Visual Studio Code extension for **Arduino** <sup>preview</sup> ! The Arduino extension makes it easy to develop, build, and deploy your Arduino sketches in Visual Studio Code, with a rich set of functionalities. These include:
 
 * IntelliSense and syntax highlighting for Arduino sketches

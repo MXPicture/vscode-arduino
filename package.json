@@ -1,9 +1,9 @@
 {
-  "name": "vscode-arduino-community",
-  "displayName": "Arduino Community Edition",
-  "description": "Arduino for Visual Studio Code",
-  "version": "0.7.1",
-  "publisher": "vscode-arduino",
+  "name": "vscode-arduino-mxpicture",
+  "displayName": "Arduino MXPicture Edition (Custom Hook)",
+  "description": "Arduino for Visual Studio Code incl. Custom Hook",
+  "version": "0.0.1",
+  "publisher": "MXPicture",
   "preview": true,
   "engines": {
     "vscode": "^1.63.0"
@@ -12,12 +12,12 @@
   "license": "SEE LICENSE IN LICENSE.txt",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vscode-arduino/vscode-arduino.git"
+    "url": "https://github.com/MXPicture/vscode-arduino.git"
   },
   "bugs": {
-    "url": "https://github.com/vscode-arduino/vscode-arduino/issues"
+    "url": "https://github.com/MXPicture/vscode-arduino/issues"
   },
-  "homepage": "https://github.com/vscode-arduino/vscode-arduino",
+  "homepage": "https://github.com/MXPicture/vscode-arduino",
   "categories": [
     "Programming Languages",
     "Snippets",
@@ -49,7 +49,8 @@
     "onCommand:arduino.showBoardManager",
     "onCommand:arduino.showLibraryManager",
     "onCommand:arduino.showExamples",
-    "onCommand:arduino.initialize"
+    "onCommand:arduino.initialize",
+    "onCommand:arduino.runCustomWarningFix"
   ],
   "main": "./out/src/extension",
   "contributes": {
@@ -155,6 +156,10 @@
       {
         "command": "arduino.showExamples",
         "title": "Arduino: Examples"
+      },
+      {
+        "command": "arduino.runCustomWarningFix",
+        "title": "Run Custom Platform.txt Warning Fix"
       }
     ],
     "menus": {
@@ -205,7 +210,7 @@
     ],
     "configuration": {
       "type": "object",
-      "title": "Arduino configuration",
+      "title": "Arduino Custom Hook Settings",
       "properties": {
         "arduino.useArduinoCli": {
           "type": "boolean",
@@ -283,6 +288,11 @@
           "type": "boolean",
           "default": true,
           "markdownDescription": "When true, automatically run analysis when board, configuration, or sketch settings are changed."
+        },
+        "arduino.customWarningFix.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable custom platform.txt modification to disable warning flags"
         }
       }
     },
@@ -330,7 +340,8 @@
   "scripts": {
     "build": "gulp build --mode=production",
     "postinstall": "node ./build/downloadAssets.js && cd ./src/views && npm install",
-    "test": "gulp test"
+    "test": "gulp test",
+    "vscode:prepublish": "tsc -p ./"
   },
   "extensionDependencies": [
     "ms-vscode.cpptools",
@@ -363,6 +374,7 @@
     "eslint-plugin-react": "^7.25.1",
     "eslint-plugin-require-path-exists": "^1.1.9",
     "fancy-log": "^2.0.0",
+    "fs-extra": "^11.1.1",
     "gulp": "^4.0.2",
     "gulp-eslint": "^6.0.0",
     "gulp-sourcemaps": "^2.4.1",

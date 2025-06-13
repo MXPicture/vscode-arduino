@@ -27,6 +27,7 @@ import { ArduinoWorkspace } from "../common/workspace";
 import { SerialMonitor } from "../serialmonitor/serialMonitor";
 import { UsbDetector } from "../serialmonitor/usbDetector";
 import { ProgrammerManager } from "./programmerManager";
+import { runCustomWarningFix } from "../preBuildHook";
 
 /**
  * Supported build modes. For further explanation see the documentation
@@ -588,6 +589,8 @@ export class ArduinoApp {
                 vscode.commands.executeCommand("arduino.selectSerialPort");
             }
         }
+        
+        await runCustomWarningFix();
 
         if (buildMode === BuildMode.Upload) {
             if ((!dc.configuration || !/upload_method=[^=,]*st[^,]*link/i.test(dc.configuration)) && !dc.port) {
